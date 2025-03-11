@@ -8,9 +8,25 @@ export default {
   ],
   theme: {
     extend: {
+      screens: {
+        sm: "480px",
+        md: "768px",
+        lg: "991px",
+      },
+      container: {
+        center: true,
+        padding: {
+          DEFAULT: "1rem",
+          sm: "1.5rem",
+        },
+      },
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+        bgStyle: "#57c4ff31",
+        bgFashion: "#da85c731",
+        bgFood: "#7fb88133",
+        bgTravel: "#ff795736",
+        bgCulture: "#ffb04f45",
+        bgCoding: " #5e4fff31",
       },
     },
   },
