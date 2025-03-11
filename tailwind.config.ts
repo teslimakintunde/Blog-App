@@ -8,6 +8,12 @@ export default {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        Oswald: ["Oswald", "sans-serif"],
+        poppins: ["Poppins", "sans-serif"],
+        roboto: ["Roboto", "sans-serif"],
+        Abril_Fatface: ["Abril Fatface", "serif"],
+      },
       screens: {
         sm: "480px",
         md: "768px",

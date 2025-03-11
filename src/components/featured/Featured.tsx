@@ -3,7 +3,7 @@ import Image from "next/image";
 
 const Featured = () => {
   return (
-    <section className="container">
+    <section className="container mt-10 font-poppins">
       <h1 className="text-[75px] leading-none">
         <b> Hey, Tesak dev here!</b> Discover my stories and creative ideas.
       </h1>
