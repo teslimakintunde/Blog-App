@@ -1,5 +1,5 @@
 "use client";
-import { useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 import React from "react";
 
@@ -14,7 +14,12 @@ const AuthLinks = () => {
           <Link href={"/write"} className="mr-5">
             Write
           </Link>
-          <Link href={"/logout"}>Logout</Link>
+          <button
+            className="hidden md:block px-4 py-2  text-white bg-red-600 rounded-md transition"
+            onClick={() => signOut()}
+          >
+            Logout
+          </button>
         </>
       )}
       {/* <Link href={"/"}>AuthLinks</Link> */}
