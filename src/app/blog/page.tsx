@@ -1,0 +1,18 @@
+import CardList from "@/components/cardlist/CardList";
+import Menu from "@/components/menu/Menu";
+
+const BlogPage = () => {
+  return (
+    <section className="container font-roboto">
+      <div className="bg-red-400 py-2 rounded-sm text-white text-3xl text-center">
+        <h1 className="font-bold ">Style Blogs</h1>
+      </div>
+      <div className="grid grid-cols-6">
+        <CardList />
+        <Menu />
+      </div>
+    </section>
+  );
+};
+
+export default BlogPage;

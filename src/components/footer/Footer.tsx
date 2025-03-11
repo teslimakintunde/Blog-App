@@ -4,7 +4,7 @@ import Link from "next/link";
 
 const Footer = () => {
   return (
-    <footer className="container grid grid-cols-[minmax(300px,5fr)_1fr_1fr_1fr] my-32">
+    <footer className="container grid grid-cols-[minmax(300px,5fr)_1fr_1fr_1fr] my-32 font-roboto">
       {/*First Column */}
       <div>
         <span className="flex flex-row gap-5 mb-6 ">

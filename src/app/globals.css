@@ -19,6 +19,9 @@ body {
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
 } */
+
+
+
 @layer utilities{
   /* section{
     @apply py-[5rem] sm:py-[4rem] md:py-[3.9rem] lg:py-[100px] 
