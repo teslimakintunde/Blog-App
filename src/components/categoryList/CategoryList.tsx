@@ -40,6 +40,7 @@ const getData = async (): Promise<Category[] | null> => {
 
 const CategoryList = async () => {
   const data = await getData();
+  console.log(data, "data");
   return (
     <section className="container">
       <div>
