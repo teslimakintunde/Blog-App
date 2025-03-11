@@ -3,6 +3,7 @@ import { Oswald, Roboto, Abril_Fatface } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/navbar/Navbar";
 import Footer from "@/components/footer/Footer";
+import AuthProvider from "@/provider/AuthProvider";
 
 const roboto = Roboto({
   weight: "400",
@@ -33,9 +34,11 @@ export default function RootLayout({
       <body
         className={`${roboto.className} ${oswald.className} ${abriFatface.className} antialiased`}
       >
-        <Navbar />
-        {children}
-        <Footer />
+        <AuthProvider>
+          <Navbar />
+          {children}
+          <Footer />
+        </AuthProvider>
       </body>
     </html>
   );

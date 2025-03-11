@@ -1,11 +1,13 @@
+"use client";
+import { useSession } from "next-auth/react";
 import Link from "next/link";
 import React from "react";
 
 const AuthLinks = () => {
-  const status = "notauthenticated";
+  const { status } = useSession();
   return (
     <div>
-      {status === "notauthenticated" ? (
+      {status === "unauthenticated" ? (
         <Link href={"/login"}>Login</Link>
       ) : (
         <>
