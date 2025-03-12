@@ -18,7 +18,7 @@ const Pagination = ({ page, hasNext, hasPrev, cat }: PaginationProps) => {
     if (cat) {
       params.set("cat", cat);
     }
-    router.push(`?${params.toString()}`);
+    router.replace(`?${params.toString()}`, { scroll: false });
   };
 
   return (

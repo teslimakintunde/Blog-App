@@ -95,9 +95,9 @@ import { NextResponse } from "next/server";
 
 export async function GET(
   req: Request,
-  { params }: { params: { slug: string } }
+  { params }: { params: Promise<Record<string, string>> } // ✅ Fix type definition
 ) {
-  const { slug } = params;
+  const { slug } = await params; // ✅ Ensure slug is correctly extracted
 
   try {
     const post = await prisma.post.findUnique({
