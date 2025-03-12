@@ -10,7 +10,7 @@ interface HomePageProps {
 
 const HomePage: React.FC<HomePageProps> = ({ searchParams }) => {
   const page = parseInt(searchParams.page || "1", 10);
-  const cat = searchParams.cat || ""; // Ensure `cat` is always defined
+  const cat: string = searchParams.cat ?? ""; // Ensure `cat` is always a string
 
   return (
     <div className="font-roboto">
