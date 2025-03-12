@@ -21,14 +21,10 @@ const bgClass: Record<string, string> = {
 };
 
 const getData = async (): Promise<Category[] | null> => {
+  // const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000/api";
+  // const apiRes = await fetch(`${apiUrl}/categories`);
   try {
-    const apiRes = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/categories`,
-      {
-        method: "GET",
-        cache: "no-store",
-      }
-    );
+    const apiRes = await fetch("http://localhost:3000/api/categories");
     if (!apiRes.ok) throw new Error("Failed to fetch data");
     const result: Category[] = await apiRes.json();
     return result;
