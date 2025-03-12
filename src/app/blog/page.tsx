@@ -1,16 +1,19 @@
 import CardList from "@/components/cardlist/CardList";
 import Menu from "@/components/menu/Menu";
 
+// type BlogPageProps = {
+//   searchParams?: { [key: string]: string | undefined };
+// };
 type BlogPageProps = {
-  searchParams: {
-    page?: string;
-    cat?: string;
-  };
+  searchParams: Promise<{ page?: string; cat?: string }>;
 };
 
-const BlogPage: React.FC<BlogPageProps> = ({ searchParams }) => {
-  const page = parseInt(searchParams.page || "1", 10);
-  const { cat } = searchParams;
+const BlogPage = async ({ searchParams }: BlogPageProps) => {
+  const params = await searchParams; // ✅ Await searchParams before using it
+
+  const page = parseInt(params.page || "1", 10);
+  const cat = params.cat || "";
+
   return (
     <section className="container font-roboto">
       <div className="bg-red-400 py-2 rounded-sm text-white text-3xl text-center">

@@ -93,10 +93,36 @@
 import { prisma } from "@/utils/prisma";
 import { NextResponse } from "next/server";
 
+// export async function GET(
+//   req: Request,
+//   { params }: { params: Promise<Record<string, string>> } // ✅ Fix type definition
+// ) {
+//   const { slug } = await params; // ✅ Ensure slug is correctly extracted
+
+//   try {
+//     const post = await prisma.post.findUnique({
+//       where: { slug },
+//     });
+
+//     if (!post) {
+//       return NextResponse.json({ message: "Post not found" }, { status: 404 });
+//     }
+
+//     return NextResponse.json(post, { status: 200 });
+//   } catch (error) {
+//     console.error("Error fetching post:", error);
+//     return NextResponse.json(
+//       { message: "Internal Server Error" },
+//       { status: 500 }
+//     );
+//   }
+// }
+
 export async function GET(
-  req: Request,
-  { params }: { params: Promise<Record<string, string>> } // ✅ Fix type definition
+  request: Request,
+  { params }: { params: Promise<{ slug: string }> }
 ) {
+  // const { slug } = await params // 'a', 'b', or 'c'
   const { slug } = await params; // ✅ Ensure slug is correctly extracted
 
   try {
