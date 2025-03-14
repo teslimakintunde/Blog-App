@@ -25,7 +25,6 @@ const Pagination = ({ page, hasNext, hasPrev, cat }: PaginationProps) => {
     <section className="sm:max-w-[80%] w-full mt-16">
       <div className="flex justify-between max-w-[80%]">
         <button
-          //onClick={() => router.push(`?page=${page - 1}`)}
           onClick={() => handleNavigation(page - 1)}
           disabled={!hasPrev}
           className="disabled:cursor-not-allowed disabled:opacity-50 px-6 py-2 bg-red-400 font-medium text-white rounded-sm"
@@ -34,7 +33,6 @@ const Pagination = ({ page, hasNext, hasPrev, cat }: PaginationProps) => {
         </button>
         <button
           disabled={!hasNext}
-          //onClick={() => router.push(`?page=${page + 1}`)}
           onClick={() => handleNavigation(page + 1)}
           className="disabled:cursor-not-allowed disabled:opacity-50 px-6 py-2 bg-red-400 font-medium text-white rounded-sm"
         >

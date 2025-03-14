@@ -7,7 +7,8 @@ import DisplayImage from "@/components/display-image/DisplayImage";
 
 const getPost = async (slug: string) => {
   try {
-    const res = await fetch(`http://localhost:3000/api/posts/${slug}`);
+    const BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000";
+    const res = await fetch(`${BASE_URL}/api/posts/${slug}`);
     const result = await res.json();
     return result;
   } catch (error) {

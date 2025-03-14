@@ -29,16 +29,6 @@ const fetcher = async (url: string) => {
     console.log(error);
   }
 };
-// const fetcher = async (url: string): Promise<Post[] | undefined> => {
-//   try {
-//     const data = await fetch(url);
-//     const res = await data.json();
-//     return res;
-//   } catch (error) {
-//     console.log("Fetch error:", error);
-//     return undefined;
-//   }
-// };
 
 const ViewPost = () => {
   const { data, mutate, isLoading } = useSWR<Post[]>(
@@ -63,7 +53,11 @@ const ViewPost = () => {
   const handleDelete = async (slug: string) => {
     // ✅ Use slug instead of id
     try {
-      const res = await fetch(`/api/posts/${slug}`, { method: "DELETE" });
+      const BASE_URL =
+        process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000";
+      const res = await fetch(`${BASE_URL}/api/posts/${slug}`, {
+        method: "DELETE",
+      });
       const data = await res.json();
       console.log("Delete response:", data); // Debugging
       if (data) {

@@ -27,24 +27,25 @@ const Comments = ({ postSlug }: { postSlug: string }) => {
   const { status } = useSession();
   const [desc, setDesc] = useState("");
   //const status = "unauthenticated";
+  const BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000";
   const {
     data = [],
     mutate,
     isLoading,
-  } = useSWR(
-    `http://localhost:3000/api/comments?postSlug=${postSlug}`,
-    fetcher
-  );
+  } = useSWR(`${BASE_URL}/api/comments?postSlug=${postSlug}`, fetcher);
   const handleSubmit = async () => {
     if (!desc.trim()) return; // Prevent empty comments
     try {
-      const res = await fetch("/api/comments", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ desc, postSlug }),
-      });
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/api/comments`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ desc, postSlug }),
+        }
+      );
       if (!res.ok) {
         const errorData = await res.json();
         throw new Error(errorData.message || "Failed to post comment");

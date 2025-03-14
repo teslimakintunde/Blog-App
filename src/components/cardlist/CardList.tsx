@@ -32,8 +32,9 @@ const getData = async (
   cat?: string
 ): Promise<ApiResponse | null> => {
   try {
+    const BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000";
     const apiRes = await fetch(
-      `http://localhost:3000/api/posts?page=${page}&cat=${cat ?? ""}`
+      `${BASE_URL}/api/posts?page=${page}&cat=${cat ?? ""}`
     );
     if (!apiRes.ok) throw new Error("Failed to fetch data");
 

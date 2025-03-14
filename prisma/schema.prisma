@@ -33,6 +33,9 @@ model User {
   password String?
   Post Post[]
   Comment Comment[]
+
+   // Fix: Add relation to PasswordResetToken
+  passwordResetTokens PasswordResetToken[] @relation("UserPasswordResetTokens") // Ensure this line is present
 }
  
 model Account {
@@ -124,4 +127,15 @@ model Comment {
   user      User     @relation(fields: [userEmail], references: [email])
   postSlug  String
   post      Post     @relation(fields: [postSlug], references: [slug])
+}
+
+
+
+
+model PasswordResetToken {
+  id        String   @id @default(cuid()) @map("_id") 
+  userId    String  @unique  // ✅ Make userId unique
+  token     String   @unique
+  expiresAt DateTime
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade, name: "UserPasswordResetTokens") // Add the relation name here
 }

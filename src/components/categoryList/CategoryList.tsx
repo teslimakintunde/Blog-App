@@ -23,8 +23,11 @@ const bgClass: Record<string, string> = {
 const getData = async (): Promise<Category[] | null> => {
   // const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000/api";
   // const apiRes = await fetch(`${apiUrl}/categories`);
+
+  const BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000"; // Default to localhost if not in Vercel
   try {
-    const apiRes = await fetch("http://localhost:3000/api/categories");
+    //const apiRes = await fetch("http://localhost:3000/api/categories");
+    const apiRes = await fetch(`${BASE_URL}/api/categories`);
     if (!apiRes.ok) throw new Error("Failed to fetch data");
     const result: Category[] = await apiRes.json();
     return result;
@@ -36,7 +39,7 @@ const getData = async (): Promise<Category[] | null> => {
 
 const CategoryList = async () => {
   const data = await getData();
-  console.log(data, "data");
+
   return (
     <section className="container lg:mt-[10px]">
       <div>
