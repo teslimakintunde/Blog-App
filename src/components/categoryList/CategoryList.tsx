@@ -12,7 +12,7 @@ type Category = {
 
 // Define background class mappings
 const bgClass: Record<string, string> = {
-  style: "bg-sport",
+  sport: "bg-sport",
   travel: "bg-travel",
   coding: "bg-coding",
   fashion: "bg-fashion",
@@ -38,9 +38,9 @@ const CategoryList = async () => {
   const data = await getData();
   console.log(data, "data");
   return (
-    <section className="container">
+    <section className="container lg:mt-[10px]">
       <div>
-        <h2 className="text-[50px] mt-10 font-medium mb-6 ">
+        <h2 className="text-[30px] md:text-4xl font-medium mb-5">
           Popular Category
         </h2>
       </div>

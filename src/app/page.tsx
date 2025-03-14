@@ -15,14 +15,19 @@ const HomePage = async ({ searchParams }: HomePageProps) => {
   const cat = params.cat || "";
 
   return (
-    <div className="font-roboto">
-      <Featured />
-      <CategoryList />
-      <div className="container grid grid-cols-6">
-        <CardList page={page} cat={cat} />
+    <section className="container font-roboto">
+      <div className="overflow-hidden">
+        <Featured />
+      </div>
+
+      <div className="mb-32">
+        <CategoryList />
+      </div>
+      <div className="flex flex-row justify-between items-start -mt-[90px]">
+        <CardList cat={cat} page={page} />
         <Menu />
       </div>
-    </div>
+    </section>
   );
 };
 

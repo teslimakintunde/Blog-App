@@ -8,28 +8,30 @@ type MenuCardProps = {
 
 const MenuCard: React.FC<MenuCardProps> = ({ withImage }) => {
   return (
-    <Link href={"/"} className="">
+    <Link href={"/"} className="col-span-2">
       <div className={`${withImage && "flex flex-row gap-4"}`}>
-        <div className="">
+        <div className="flex gap-4">
           {withImage && (
-            <Image
-              src={"/p1.jpeg"}
-              width={32}
-              height={32}
-              alt=""
-              className="rounded-full"
-            />
+            <div className="relative w-[32] h-[32] rounded-full shrink-0">
+              <Image
+                src={"/p1.jpeg"}
+                width={32}
+                height={32}
+                alt=""
+                className="rounded-full"
+              />
+            </div>
           )}
         </div>
         <div>
-          <span className="bg-red-600 font-medium rounded-full px-8 py-1 text-white">
+          <span className="px-6 py-2 bg-red-400 text-white font-medium rounded-full">
             Travel
           </span>
-          <p className="my-2 font-medium">
+          <p className="mt-3 font-medium">
             Lorem ipsum dolor sit amet, consectetur adipisicing elit.
             Recusandae, eos.
           </p>
-          <div className="space-x-4">
+          <div className="mt-3 flex gap-5 font-medium">
             <span>John Doe</span>
             <span>01.02.2025</span>
           </div>

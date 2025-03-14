@@ -1,23 +1,23 @@
 import type { Metadata } from "next";
-import { Oswald, Roboto, Abril_Fatface } from "next/font/google";
+//import { Oswald, Roboto, Abril_Fatface } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/navbar/Navbar";
 import Footer from "@/components/footer/Footer";
 import AuthProvider from "@/provider/AuthProvider";
 
-const roboto = Roboto({
-  weight: "400",
-  subsets: ["latin"],
-});
+// const roboto = Roboto({
+//   weight: "400",
+//   subsets: ["latin"],
+// });
 
-const oswald = Oswald({
-  weight: ["400", "400", "500", "700"],
-  subsets: ["latin"],
-});
-const abriFatface = Abril_Fatface({
-  weight: "400",
-  subsets: ["latin"],
-});
+// const oswald = Oswald({
+//   weight: ["400", "400", "500", "700"],
+//   subsets: ["latin"],
+// });
+// const abriFatface = Abril_Fatface({
+//   weight: "400",
+//   subsets: ["latin"],
+// });
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -31,9 +31,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${roboto.className} ${oswald.className} ${abriFatface.className} antialiased`}
-      >
+      <body className="font-roboto font-oswald font-abril antialiased">
         <AuthProvider>
           <Navbar />
           {children}

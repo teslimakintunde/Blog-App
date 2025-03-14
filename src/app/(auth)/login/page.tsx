@@ -24,8 +24,8 @@ const LoginPage = () => {
   };
   console.log(status);
   return (
-    <section className="container">
-      <div className=" max-w-[700px] mx-auto bg-slate-100 flex flex-col gap-8 items-center justify-center my-32 rounded-sm">
+    <section className="container py-[120px]">
+      <div className="max-w-[700px] mx-auto bg-slate-100 flex flex-col gap-8 items-center justify-center rounded-sm">
         <div className="mt-16">
           <h1 className="text-3xl font-medium ">Sign In</h1>
         </div>

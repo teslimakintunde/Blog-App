@@ -1,94 +1,113 @@
-import Link from "next/link";
-import React from "react";
+"use client";
+import React, { useState } from "react";
 import Image from "next/image";
+import { useSession } from "next-auth/react";
+import useSWR from "swr";
 
-const Comments = () => {
-  const status = "authenticated";
+interface Comment {
+  id: string;
+  desc: string;
+  createdAt: string;
+  user: {
+    name: string;
+    image?: string;
+  };
+}
+
+const fetcher = async (url: string): Promise<Comment[]> => {
+  const res = await fetch(url);
+  // const data = await res.json();
+  // return data;
+  if (!res.ok) throw new Error("Failed to fetch comments");
+  const data: Comment[] = await res.json();
+  return data || [];
+};
+
+const Comments = ({ postSlug }: { postSlug: string }) => {
+  const { status } = useSession();
+  const [desc, setDesc] = useState("");
+  //const status = "unauthenticated";
+  const {
+    data = [],
+    mutate,
+    isLoading,
+  } = useSWR(
+    `http://localhost:3000/api/comments?postSlug=${postSlug}`,
+    fetcher
+  );
+  const handleSubmit = async () => {
+    if (!desc.trim()) return; // Prevent empty comments
+    try {
+      const res = await fetch("/api/comments", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ desc, postSlug }),
+      });
+      if (!res.ok) {
+        const errorData = await res.json();
+        throw new Error(errorData.message || "Failed to post comment");
+      }
+      setDesc("");
+      mutate();
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
-    <div className="col-span-4 my-16">
-      <div className="my-15">
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, dolore
-          quis? Excepturi sit facilis optio itaque libero dolores iste aliquid.
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, dolore
-          quis? Excepturi sit facilis optio itaque libero dolores iste aliquid.
-        </p>
-        <p className="my-8">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, dolore
-          quis? Excepturi sit facilis optio itaque libero dolores iste aliquid.
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, dolore
-          quis? Excepturi sit facilis optio itaque libero dolores iste aliquid.
-        </p>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, dolore
-          quis? Excepturi sit facilis optio itaque libero dolores iste aliquid.
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, dolore
-          quis? Excepturi sit facilis optio itaque libero dolores iste aliquid.
-        </p>
-      </div>
-      <div className="my-32">
+    <section className="md:mt-32 mt-10">
+      <div>
         {status === "authenticated" ? (
-          <div className="flex flex-row gap-5 items-start">
-            <div className="w-4/5 h-[150px] border-solid border">
+          <div className="flex flex-col md:flex-row gap-5 items-start">
+            <div className="h-[150px] w-full  md:w-[50%]">
               <textarea
-                placeholder="write a comments"
-                className="border border-solid w-full h-full p-5"
+                value={desc}
+                onChange={(e) => setDesc(e.target.value)}
+                name=""
+                id=""
+                className="border w-full h-full p-5"
               />
             </div>
-            <button className="bg-red-400 text-white justify-start font-medium px-6 py-2 rounded-sm w-max">
-              Send
+            <button
+              onClick={handleSubmit}
+              className="px-6 py-2 bg-red-400 text-white font-medium rounded-sm"
+            >
+              {isLoading ? "Sending..." : "Send"}
             </button>
           </div>
-        ) : (
-          <Link href={"/login"}>Login to write comments</Link>
-        )}
-      </div>
-      <div className="flex gap-10 flex-col">
-        {/* First User */}
-        <div className="">
-          <span className="flex gap-3">
-            <Image
-              src={"/logo (1).png"}
-              alt=""
-              width={40}
-              height={40}
-              className="rounded-full"
-            />
-            <span>
-              <p className="font-medium text-xl">John Doeee</p>
-              <p>01.02.2025</p>
-            </span>
-          </span>
-          <p className="mt-7 max-w-[70ch]">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus
-            tempore pariatur laboriosam eum at distinctio ad! Maxime modi odio
-            eum?
-          </p>
-        </div>
-        {/* First User */}
-        <div className="">
-          <span className="flex gap-3">
-            <Image
-              src={"/logo (1).png"}
-              alt=""
-              width={40}
-              height={40}
-              className="rounded-full"
-            />
-            <span>
-              <p className="font-medium text-xl">John Doeee</p>
-              <p>01.02.2025</p>
-            </span>
-          </span>
-          <p className="mt-7 max-w-[70ch]">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus
-            tempore pariatur laboriosam eum at distinctio ad! Maxime modi odio
-            eum?
-          </p>
+        ) : null}
+        <div className="flex flex-col gap-9 mt-16">
+          {/* USER ! */}
+          {data &&
+            data?.map((item) => (
+              <div key={item.id}>
+                <div className="flex flex-row items-center gap-5 mb-6">
+                  <span>
+                    {item.user.image && (
+                      <Image
+                        src={item.user.image}
+                        alt=""
+                        width={32}
+                        height={32}
+                        className="rounded-full"
+                      />
+                    )}
+                  </span>
+                  <div>
+                    <p>{item.user.name}</p>
+                    <p>{item?.createdAt?.substring(0, 10)}</p>
+                  </div>
+                </div>
+                <div>
+                  <p className="max-w-[60ch]">{item?.desc}</p>
+                </div>
+              </div>
+            ))}
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 

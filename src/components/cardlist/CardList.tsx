@@ -56,21 +56,20 @@ const CardList: React.FC<CardListProps> = async ({ page, cat }) => {
   const hasPrev = POST_PER_PAGE * (page - 1) > 0;
   const hasNext = POST_PER_PAGE * (page - 1) + POST_PER_PAGE < count;
 
-  console.log(posts);
-
   return (
-    <section className="col-span-4">
+    <section className="flex-1">
       <div>
-        <h3 className="text-4xl font-bold my-16">Recent Post</h3>
-        <div className="flex gap-5 flex-col">
-          {/* {posts && posts?.map((item) => <Card key={item.id} item={item} />)} */}
+        <div>
+          <h3 className="text-3xl font-bold my-9">Recent Posts</h3>
+        </div>
+        <div className="flex flex-col gap-9">
           {posts.length > 0 ? (
             posts.map((item: Post) => <Card key={item.id} item={item} />)
           ) : (
             <p>No posts available.</p>
           )}
         </div>
-        <Pagination page={page} hasNext={hasNext} hasPrev={hasPrev} />
+        <Pagination page={page} hasNext={hasNext} hasPrev={hasPrev} cat={cat} />
       </div>
     </section>
   );

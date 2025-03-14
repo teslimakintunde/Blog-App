@@ -1,9 +1,6 @@
 import CardList from "@/components/cardlist/CardList";
 import Menu from "@/components/menu/Menu";
 
-// type BlogPageProps = {
-//   searchParams?: { [key: string]: string | undefined };
-// };
 type BlogPageProps = {
   searchParams: Promise<{ page?: string; cat?: string }>;
 };
@@ -16,12 +13,14 @@ const BlogPage = async ({ searchParams }: BlogPageProps) => {
 
   return (
     <section className="container font-roboto">
-      <div className="bg-red-400 py-2 rounded-sm text-white text-3xl text-center">
-        <h1 className="font-bold ">Style Blogs</h1>
-      </div>
-      <div className="grid grid-cols-6">
-        <CardList page={page} cat={cat} />
-        <Menu />
+      <div className="pt-[100px] md:pt-[70px]">
+        <div className="py-3 bg-red-400 md:my-20 text-white text-center rounded-sm">
+          <h1 className="font-bold text-xl capitalize">{cat} Blogs</h1>
+        </div>
+        <div className="flex flex-row justify-between items-start">
+          <CardList page={page} cat={cat} />
+          <Menu />
+        </div>
       </div>
     </section>
   );

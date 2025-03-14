@@ -1,28 +1,30 @@
 "use client";
 import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 const AuthLinks = () => {
   const { status } = useSession();
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  if (!isClient || status === "loading") return null; // Avoid rendering on SSR
+
   return (
     <div>
       {status === "unauthenticated" ? (
-        <Link href={"/login"}>Login</Link>
+        <Link href="/login">Login</Link>
       ) : (
-        <>
-          <Link href={"/write"} className="mr-5">
-            Write
-          </Link>
-          <button
-            className="hidden md:block px-4 py-2  text-white bg-red-600 rounded-md transition"
-            onClick={() => signOut()}
-          >
-            Logout
-          </button>
-        </>
+        <button
+          className="hidden md:block px-4 py-2 text-white bg-red-600 rounded-md transition"
+          onClick={() => signOut()}
+        >
+          Logout
+        </button>
       )}
-      {/* <Link href={"/"}>AuthLinks</Link> */}
     </div>
   );
 };

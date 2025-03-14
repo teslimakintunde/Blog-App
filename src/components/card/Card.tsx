@@ -1,61 +1,81 @@
+"use client";
 import React from "react";
-import Image from "next/image";
 import Link from "next/link";
+import { CldImage } from "next-cloudinary";
+import Image from "next/image";
+import DisplayText from "../display-text/DisplayText";
 
+// Define the TypeScript type for Post
 interface Post {
   id: string;
-  title: string;
-  desc: string; // ✅ Added missing `desc`
-  slug: string;
   createdAt: string;
-  img?: string; // Optional image property
+  slug: string;
+  title: string;
+  desc: string;
+  img?: string;
   views: number;
-  catSlug: string; // ✅ Added missing `catSlug`
-  userEmail: string;
+  catSlug: string;
 }
 
-// Define props type
+// Function to remove HTML tags
+const stripHtml = (html: string): string => {
+  return html.replace(/<\/?[^>]+(>|$)/g, "");
+};
+
+// Define props type for Card component
 interface CardProps {
   item: Post;
 }
-
 const Card: React.FC<CardProps> = ({ item }) => {
   return (
-    <div className="grid grid-cols-2 gap-5 ">
-      {item.img ? (
-        <div className="relative h-[350px] ">
-          <Image src={item.img} fill alt="" className="object-cover" />
-        </div>
-      ) : (
-        <div className="relative h-[350px] ">
-          <Image src={"/p1.jpeg"} fill alt="" className="object-cover" />
-        </div>
-      )}
-
-      <div className="flex flex-col justify-between  w-full">
-        <div className="flex-1">
-          <span className="font-medium mr-3">
-            {item.createdAt.substring(0, 10)}-
-          </span>
-          <span className="font-medium text-red-500">{item.catSlug}</span>
-        </div>
-        <div className="flex-2 h-full justify-between w-full flex flex-col">
-          <Link
-            href={`/posts/${item.slug}`}
-            className="font-medium text-2xl my-5"
-          >
-            {item.title}
-          </Link>
-          <p className="mb-8 -mt-9">{item.desc.substring(0, 60)}</p>
-          <Link
-            href={`/posts/${item.slug}`}
-            className="underline font-medium items-end"
-          >
-            Read More
-          </Link>
-        </div>
+    <section className="grid grid-cols-1 md:grid-cols-2 gap-5">
+      <div className="h-[350px]">
+        {item.img ? (
+          <div className="relative h-[320px]">
+            <CldImage
+              src={item?.img}
+              alt="collection"
+              className="object-cover rounded-lg"
+              fill
+            />
+          </div>
+        ) : (
+          <div className="relative h-[300px]">
+            <Image src={"/p1.jpeg"} alt="" fill />
+          </div>
+        )}
       </div>
-    </div>
+      <div className="h-full ">
+        <div className="flex flex-row md:gap-3">
+          <span>{new Date(item.createdAt).toISOString().split("T")[0]} - </span>
+          <p className="capitalize text-red-400 font-bold">{item.catSlug}</p>
+        </div>
+        <div className="mt-5 mb-10">
+          <h3 className="sm:text-3xl text-[20px] font-bold max-w-[20ch]">
+            {stripHtml(item.title).length > 30
+              ? stripHtml(item.title).substring(0, 30) + "..."
+              : stripHtml(item.title)}
+          </h3>
+
+          {/* <div
+            className="mt-3 md:max-w-[50ch] lg:max-w-[40ch] overflow-hidden"
+            dangerouslySetInnerHTML={{
+              __html:
+                item.desc.length > 100
+                  ? item.desc.substring(0, 100) + "..."
+                  : item.desc,
+            }}
+          /> */}
+          <DisplayText item={item} />
+        </div>
+        <Link
+          href={`/posts/${item?.slug}`}
+          className="px-6 py-2 bg-red-400 font-medium rounded-md text-white"
+        >
+          Read More
+        </Link>
+      </div>
+    </section>
   );
 };
 
