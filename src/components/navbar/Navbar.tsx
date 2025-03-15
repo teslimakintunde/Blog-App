@@ -120,14 +120,14 @@ const Navbar = () => {
             {/* "Write" and "View Posts" as Buttons */}
             <Link
               href="/write"
-              className="bg-blue-500 text-white px-6 py-3 rounded-lg hover:bg-blue-600 transition w-full text-center"
+              className="bg-blue-500 w-max text-white px-6 py-3 rounded-lg hover:bg-blue-600 transition text-center"
               onClick={() => setIsMenuOpen(false)}
             >
               Write
             </Link>
             <Link
               href="/view-posts"
-              className="bg-green-500 text-white px-6 py-3 rounded-lg hover:bg-green-600 transition w-full text-center"
+              className="bg-green-500 w-max text-white px-6 py-3 rounded-lg hover:bg-green-600 transition text-center"
               onClick={() => setIsMenuOpen(false)}
             >
               View Posts

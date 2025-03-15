@@ -17,7 +17,7 @@ const Menu = () => {
       </div>
       <div className="my-10">
         <div className="mb-5">
-          <p className="mt-14">Discover by Topic</p>
+          <p className="mt-14">Discover by Topic.</p>
           <h3 className="text-3xl font-medium mt-2">Categories</h3>
           <div className="flex flex-col gap-5 font-medium mt-8 ">
             <div className="flex flex-wrap gap-3">

@@ -1,8 +1,8 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 
-const ForgotPassword = () => {
+const ForgotPasswordPin = () => {
   // const router = useRouter();
   const searchParams = useSearchParams();
   const [email, setEmail] = useState("");
@@ -56,6 +56,14 @@ const ForgotPassword = () => {
       </button>
       {message && <p className="mt-3 text-green-500">{message}</p>}
     </section>
+  );
+};
+
+const ForgotPassword = () => {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <ForgotPasswordPin />
+    </Suspense>
   );
 };
 
