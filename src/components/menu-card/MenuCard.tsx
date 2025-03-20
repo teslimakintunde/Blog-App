@@ -14,7 +14,7 @@ const MenuCard: React.FC<MenuCardProps> = ({ withImage }) => {
           {withImage && (
             <div className="relative w-[32] h-[32] rounded-full shrink-0">
               <Image
-                src={"/p1.jpeg"}
+                src={"/avatar2.png"}
                 width={32}
                 height={32}
                 alt=""

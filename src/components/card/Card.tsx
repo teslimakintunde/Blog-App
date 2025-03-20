@@ -28,7 +28,7 @@ interface CardProps {
 }
 const Card: React.FC<CardProps> = ({ item }) => {
   return (
-    <section className="grid grid-cols-1 md:grid-cols-2 gap-5">
+    <section className="grid grid-cols-1 md:gap-5 md:grid-cols-2">
       <div className="h-[350px]">
         {item.img ? (
           <div className="relative h-[320px]">
@@ -41,11 +41,11 @@ const Card: React.FC<CardProps> = ({ item }) => {
           </div>
         ) : (
           <div className="relative h-[300px]">
-            <Image src={"/blog-image.jpg"} alt="" fill />
+            <Image src={"/blog-image.jpg"} alt="" fill className="rounded-md" />
           </div>
         )}
       </div>
-      <div className="h-full ">
+      <div className="h-full -mt-5 md:-mt-0  ">
         <div className="flex flex-row md:gap-3">
           <span>{new Date(item.createdAt).toISOString().split("T")[0]} - </span>
           <p className="capitalize text-red-400 font-bold">{item.catSlug}</p>

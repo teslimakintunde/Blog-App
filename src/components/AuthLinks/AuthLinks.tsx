@@ -24,7 +24,7 @@ const AuthLinks = () => {
         </Link>
       ) : (
         <button
-          className="hidden md:block px-4 py-2 text-white bg-red-600 rounded-md transition"
+          className=" px-4 py-2 text-white bg-red-600 rounded-md transition"
           onClick={() => signOut()}
         >
           Logout
