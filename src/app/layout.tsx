@@ -32,7 +32,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="font-roboto font-oswald font-abril antialiased">
+      <body className="font-roboto font-oswald font-abril antialiased bg-white text-black">
         <ToasterProvider />
         <AuthProvider>
           <Navbar />
