@@ -4,11 +4,13 @@ import "quill/dist/quill.bubble.css"; // For bubble theme
 
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
-import toast from "react-hot-toast";
+
 import { nanoid } from "nanoid";
 import ImageUpload from "@/components/image-upload/ImageUpload";
 
 import dynamic from "next/dynamic";
+import toast from "react-hot-toast";
+
 const ReactQuill = dynamic(() => import("react-quill-new"), { ssr: false });
 
 const WritePage = () => {
@@ -48,8 +50,9 @@ const WritePage = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!title || !category || !content || !image) {
-      return toast.error("Missing Input Fields");
+    if (!title || !category || !content) {
+      toast.error("Missing Input Fields");
+      return;
     }
 
     setLoading(true);
@@ -64,23 +67,26 @@ const WritePage = () => {
         body: JSON.stringify({
           title,
           desc: content,
-          img: image,
+          img: image || "",
           slug: uniqueSlug,
           catSlug: category,
         }),
       });
 
-      if (!res.ok) throw new Error("Failed to create the blog post");
+      if (!res.ok) {
+        const errorData = await res.json();
+        throw new Error(errorData.message || "Failed to create the blog post");
+      }
       // if (res.status === 200) {
       //   // await res.json();
       //   toast.success("Post created successfully");
       //   router.push("/");
       // }
       toast.success("Post created successfully");
-      router.push("/");
+      setTimeout(() => router.push("/"), 1500); // Delay redirect to show toast
     } catch (error) {
-      console.log(error);
-      toast.error("Error submitting post");
+      console.error("Submit Error:", error);
+      toast.error(`Error submitting post: ${error}`);
     } finally {
       setLoading(false);
     }
@@ -119,7 +125,7 @@ const WritePage = () => {
                 <option value="" disabled>
                   Choose Your Blog Category.....
                 </option>
-                <option value="style">sport</option>
+                <option value="sport">sport</option>
                 <option value="fashion">fashion</option>
                 <option value="food">food</option>
                 <option value="culture">culture</option>
@@ -161,8 +167,8 @@ const WritePage = () => {
         <div className="flex gap-5 mt-9">
           <button
             type="submit"
-            onClick={() => router.push("/")}
-            className="px-6 py-2 rounded-sm font-medium text-white bg-blue-600"
+            disabled={loading}
+            className="disabled:bg-blue-400 px-6 py-2 rounded-sm font-medium text-white bg-blue-600"
           >
             {loading ? "Publishing..." : "Publish"}
           </button>

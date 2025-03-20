@@ -4,11 +4,17 @@ import Link from "next/link";
 
 const Footer = () => {
   return (
-    <footer className="container py-[100px] mb-32 font-roboto ">
+    <footer className="container pt-[100px] mb-32 font-roboto ">
       <div className="grid grid-cols-1 lg:grid-cols-[minmax(300px,5fr)_1fr_1fr_1fr] sm:grid-cols-[minmax(250px,2fr)_1fr]  md:grid-cols-[minmax(250px,3fr)_1fr_1fr] gap-5">
         <div className="">
           <div className="flex flex-row gap-2">
-            <Image src={"/logo (1).png"} alt="" width={32} height={32} />
+            <Image
+              src={"/avatar2.png"}
+              alt=""
+              width={32}
+              height={32}
+              className="rounded-full"
+            />
             <p className="font-bold text-2xl">TesakBlog</p>
           </div>
 
@@ -23,7 +29,7 @@ const Footer = () => {
         {/* Second column */}
         <div className="items-center">
           <Link href={"/"} className="text-xl">
-            Link
+            Home
           </Link>
           <div className="flex flex-col gap-5 mt-5">
             <Link href={"/"}>HomePage</Link>
@@ -35,7 +41,7 @@ const Footer = () => {
         {/* Second column */}
         <div className="items-center">
           <Link href={"/"} className="text-xl">
-            Link
+            About
           </Link>
           <div className="flex flex-col gap-5 mt-5">
             <Link href={"/"}>HomePage</Link>
@@ -47,7 +53,7 @@ const Footer = () => {
         {/* Second column */}
         <div className="items-center">
           <Link href={"/"} className="text-xl">
-            Link
+            Blog
           </Link>
           <div className="flex flex-col gap-5 mt-5">
             <Link href={"/"}>HomePage</Link>

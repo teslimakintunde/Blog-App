@@ -23,7 +23,7 @@ const DisplayImage = ({ item }: DisplayImageProps) => {
         </div>
       ) : (
         <div className="relative h-[300px]">
-          <Image src={"/p1.jpeg"} alt="" fill />
+          <Image src={"/blog-image.jpg"} alt="" fill />
         </div>
       )}
     </div>

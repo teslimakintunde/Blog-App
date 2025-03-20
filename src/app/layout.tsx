@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "@/components/navbar/Navbar";
 import Footer from "@/components/footer/Footer";
 import AuthProvider from "@/provider/AuthProvider";
+import { ToasterProvider } from "@/utils/ToasterProvider";
 
 // const roboto = Roboto({
 //   weight: "400",
@@ -32,6 +33,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="font-roboto font-oswald font-abril antialiased">
+        <ToasterProvider />
         <AuthProvider>
           <Navbar />
           {children}

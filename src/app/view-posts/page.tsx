@@ -70,7 +70,7 @@ const ViewPost = () => {
   };
   console.log(data);
   return (
-    <section className="container pt-[130px]">
+    <section className="container pt-[130px] font-roboto">
       <div className="">
         <h1 className="text-4xl font-medium"></h1>
       </div>
@@ -95,7 +95,12 @@ const ViewPost = () => {
                   </div>
                 ) : (
                   <div className="relative h-[300px]">
-                    <Image src={"/p1.jpeg"} alt="" fill />
+                    <Image
+                      src={"/blog-image.jpg"}
+                      alt=""
+                      fill
+                      className="rounded-md"
+                    />
                   </div>
                 )}
               </div>
